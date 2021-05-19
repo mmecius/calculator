@@ -6,29 +6,81 @@ import doctest
 from hypothesis import given, assume, strategies as st
 
 
+"""Adds input number to memory
+self.__memory += __input_number
+For example:
+
+>>> calc_test = Calculator(3)
+>>> calc_test.addition(2)
+5.0
+"""
+
+"""Subtracts input number from memory
+self.__memory -= __input_number
+For example:
+>>> calc_test = Calculator(3)
+>>> calc_test.subtraction()
+1.0
+"""
+
+"""Multiply memory by input number
+self.__memory *= __input_number
+For example:
+>>> calc_test = Calculator(3)
+>>> calc_test.multiplication()
+6.0
+"""
+
+"""Divides memory by input number
+self.__memory /= __input_number
+For example:
+>>> calc_test = Calculator(6)
+>>> calc_test.division()
+3.0
+"""
+
+"""Takes root out of memory by input number
+For example:
+self.__memory **= 1 / float(__input_number)
+>>> calc_test = Calculator(4,2)
+>>> calc_test.root_of_number()
+2.0
+"""
+
+
+calc = Calculator(0)
+
+
+print(f"Addition: {calc.addition(0)}")
+print(f"Subtraction: {calc.subtraction(0)}")
+print(f"Multiplication: {calc.multiplication(0)}")
+print(f"Division: {calc.division(0)}")
+print(f"Root of number: {calc.root_of_number(2)}")
+print(f"Reset memory: {calc.reset_memory()}")
+print(f"Return memory: {calc.memory}")
+calc.memory = 2
+print(f"Reset memory: {calc.reset_memory()}")
+
+
+
 def test_addition(input_number):
-    calc_test = Calculator(3)
-    assert calc_test.addition(input_number) == 6
+    assert calc.addition(input_number) == 6
 
 
 def test_subtraction(input_number):
-    calc_test = Calculator(4)
-    assert calc_test.subtraction(input_number) == 1
+    assert calc.subtraction(input_number) == 3
 
 
 def test_multiplication(input_number):
-    calc_test = Calculator(3)
-    assert calc_test.multiplication(input_number) == 12
+    assert calc.multiplication(input_number) == 12
 
 
 def test_division(input_number):
-    calc_test = Calculator(25)
-    assert calc_test.division(input_number) == 5.0
+    assert calc.division(input_number) == 4
 
 
 def test_root_of_number(input_number):
-    calc_test = Calculator(4)
-    assert calc_test.root_of_number(input_number) == 2.0
+    assert calc.root_of_number(input_number) == 2.0
 
 
 # def test_types():
@@ -80,12 +132,15 @@ def torture_test():
 #     else:
 #         assert calc_test.root_of_number() == a ** (1 / float(b))
 
-test_addition(3)
-test_subtraction(3)
-test_multiplication(4)
-test_division(5)
+test_addition(input_number=6)
+test_subtraction(input_number=3)
+test_multiplication(input_number=4)
+test_division(input_number=3)
 test_root_of_number(2)
 # test_types(1)
-torture_test()
+print(torture_test())
 print(f"Doctest result: {doctest.testmod()}")
 # test_calculator()
+
+if __name__ == "__main__":
+    pytest.main()
