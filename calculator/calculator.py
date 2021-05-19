@@ -100,5 +100,3 @@ print(f"Multiplication: {calc.multiplication(0)}")
 print(f"Division: {calc.division(0)}")
 print(f"Root of number: {calc.root_of_number(2)}")
 print(f"Reset memory: {calc.reset_memory}")
-
-
