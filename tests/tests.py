@@ -2,51 +2,7 @@ from calculator.calculator import Calculator
 
 import itertools
 import pytest
-import doctest
 from hypothesis import given, assume, strategies as st
-
-
-"""Adds input number to memory
-self.__memory += __input_number
-For example:
-
->>> calc_test = Calculator(3)
->>> calc_test.addition(2)
-5.0
-"""
-
-"""Subtracts input number from memory
-self.__memory -= __input_number
-For example:
->>> calc_test = Calculator(3)
->>> calc_test.subtraction()
-1.0
-"""
-
-"""Multiply memory by input number
-self.__memory *= __input_number
-For example:
->>> calc_test = Calculator(3)
->>> calc_test.multiplication()
-6.0
-"""
-
-"""Divides memory by input number
-self.__memory /= __input_number
-For example:
->>> calc_test = Calculator(6)
->>> calc_test.division()
-3.0
-"""
-
-"""Takes root out of memory by input number
-For example:
-self.__memory **= 1 / float(__input_number)
->>> calc_test = Calculator(4,2)
->>> calc_test.root_of_number()
-2.0
-"""
-
 
 calc = Calculator(0)
 
@@ -83,15 +39,15 @@ def test_root_of_number(input_number):
     assert calc.root_of_number(input_number) == 2.0
 
 
-# def test_types():
-#     with pytest.raises(TypeError):
-#         calculator = Calculator(4)
-#         calculator.addition()
-#         calculator.subtraction()
-#         calculator.multiplication()
-#         calculator.division()
-#         calculator.root_of_number()
-#
+def test_types():
+    with pytest.raises(TypeError):
+        calc.addition(input_number="1")
+        calc.subtraction(input_number="2")
+        calc.multiplication(input_number="1a")
+        calc.division(input_number="a")
+        calc.root_of_number(input_number="b")
+
+
 
 
 def torture_test():
@@ -114,33 +70,31 @@ def torture_test():
             calc_testing.root_of_number(*t)
 
 
-# @given(
-#     a=st.floats(min_value=-10000, max_value=10000),
-#     b=st.floats(min_value=-10000, max_value=10000),
-# )
-# def test_calculator(a, b):
-#     calc_test = Calculator(a)
-#     assert calc_test.addition() +==
-#     assert calc_test.subtraction() == a - b
-#     assert calc_test.multiplication() == a * b
-#     if a == 0.0 or b == 0.0:
-#         assert calc_test.division() == 0.0
-#     else:
-#         assert calc_test.division() == a / b
-#     if a == 0.0 or b == 0.0:
-#         assert calc_test.root_of_number() == 0.0
-#     else:
-#         assert calc_test.root_of_number() == a ** (1 / float(b))
+@given(
+    a=st.floats(min_value=-10000, max_value=10000),
+)
+def test_calculator(a):
+    calc_test = Calculator(a)
+    assert calc_test.addition() == a +a
+    assert calc_test.subtraction() == a - a
+    assert calc_test.multiplication() == a * a
+    if a == 0.0:
+        assert calc_test.division() == 0.0
+    else:
+        assert calc_test.division() == a / a
+    if a == 0.0 or b == 0.0:
+        assert calc_test.root_of_number() == 0.0
+    else:
+        assert calc_test.root_of_number() == a ** (1 / float(a))
 
 test_addition(input_number=6)
 test_subtraction(input_number=3)
 test_multiplication(input_number=4)
 test_division(input_number=3)
 test_root_of_number(2)
-# test_types(1)
+test_types(input_number="a")
 print(torture_test())
-print(f"Doctest result: {doctest.testmod()}")
-# test_calculator()
+test_calculator()
 
 if __name__ == "__main__":
     pytest.main()
