@@ -14,16 +14,9 @@ operator 	function
 ## Installation
 
 ```bash
-pip install git+https://github.com/mmecius/calculator_tm
+pip install git+https://github.com/mmecius/calculator
 ```
 
-## Configuration
-
-Additional have to be installed:
-```bash
-pip install hypothesis
-pip install pytest
-```
 ## Docker run
 
 Additional have to be installed:
